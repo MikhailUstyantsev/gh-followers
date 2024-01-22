@@ -15,6 +15,7 @@
 		83749CBF2B5CD41D00AAA0CA /* FavoritesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83749CBE2B5CD41D00AAA0CA /* FavoritesListViewController.swift */; };
 		83749CC12B5D47C300AAA0CA /* GFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83749CC02B5D47C300AAA0CA /* GFButton.swift */; };
 		83749CC32B5D4B1B00AAA0CA /* GFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83749CC22B5D4B1B00AAA0CA /* GFTextField.swift */; };
+		83BF8DA22B5EE71000B29BEE /* FollowerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BF8DA12B5EE71000B29BEE /* FollowerListVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		83749CBE2B5CD41D00AAA0CA /* FavoritesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListViewController.swift; sourceTree = "<group>"; };
 		83749CC02B5D47C300AAA0CA /* GFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFButton.swift; sourceTree = "<group>"; };
 		83749CC22B5D4B1B00AAA0CA /* GFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTextField.swift; sourceTree = "<group>"; };
+		83BF8DA12B5EE71000B29BEE /* FollowerListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				83749CBC2B5CD3DF00AAA0CA /* SearchViewController.swift */,
 				83749CBE2B5CD41D00AAA0CA /* FavoritesListViewController.swift */,
 				83749CC22B5D4B1B00AAA0CA /* GFTextField.swift */,
+				83BF8DA12B5EE71000B29BEE /* FollowerListVC.swift */,
 			);
 			path = GHFollowers;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 				83749CBD2B5CD3DF00AAA0CA /* SearchViewController.swift in Sources */,
 				83749CC12B5D47C300AAA0CA /* GFButton.swift in Sources */,
 				83749CA92B5C62E100AAA0CA /* AppDelegate.swift in Sources */,
+				83BF8DA22B5EE71000B29BEE /* FollowerListVC.swift in Sources */,
 				83749CBF2B5CD41D00AAA0CA /* FavoritesListViewController.swift in Sources */,
 				83749CAB2B5C62E100AAA0CA /* SceneDelegate.swift in Sources */,
 			);
