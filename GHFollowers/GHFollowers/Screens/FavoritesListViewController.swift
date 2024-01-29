@@ -14,6 +14,5 @@ class FavoritesListViewController: UIViewController {
         view.backgroundColor = .systemBackground
     }
     
-
-
+    
 }
