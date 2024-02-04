@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		835B82F52B6FCC3A00D6CFAA /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835B82F42B6FCC3A00D6CFAA /* UIHelper.swift */; };
 		83749CA92B5C62E100AAA0CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83749CA82B5C62E100AAA0CA /* AppDelegate.swift */; };
 		83749CAB2B5C62E100AAA0CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83749CAA2B5C62E100AAA0CA /* SceneDelegate.swift */; };
 		83749CB22B5C62E100AAA0CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83749CB12B5C62E100AAA0CA /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		835B82F42B6FCC3A00D6CFAA /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		83749CA52B5C62E100AAA0CA /* GHFollowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHFollowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83749CA82B5C62E100AAA0CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83749CAA2B5C62E100AAA0CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				83CBE6142B6EA42000C657C5 /* ErrorMessage.swift */,
+				835B82F42B6FCC3A00D6CFAA /* UIHelper.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				83749CBD2B5CD3DF00AAA0CA /* SearchViewController.swift in Sources */,
 				83749CC12B5D47C300AAA0CA /* GFButton.swift in Sources */,
 				83B41CDE2B66E2FF00479FED /* UIViewController+Ext.swift in Sources */,
+				835B82F52B6FCC3A00D6CFAA /* UIHelper.swift in Sources */,
 				83CBE61A2B6EB5AE00C657C5 /* GFAvatarImageView.swift in Sources */,
 				83749CA92B5C62E100AAA0CA /* AppDelegate.swift in Sources */,
 				83B41CDC2B66D02400479FED /* GFAlertVC.swift in Sources */,
