@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8312CF582B78702A005EC36C /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8312CF572B78702A005EC36C /* UserInfoVC.swift */; };
 		835B82F52B6FCC3A00D6CFAA /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835B82F42B6FCC3A00D6CFAA /* UIHelper.swift */; };
 		835B83242B76BB3D00D6CFAA /* GFEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835B83232B76BB3D00D6CFAA /* GFEmptyStateView.swift */; };
 		83749CA92B5C62E100AAA0CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83749CA82B5C62E100AAA0CA /* AppDelegate.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8312CF572B78702A005EC36C /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
 		835B82F42B6FCC3A00D6CFAA /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		835B83232B76BB3D00D6CFAA /* GFEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFEmptyStateView.swift; sourceTree = "<group>"; };
 		83749CA52B5C62E100AAA0CA /* GHFollowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHFollowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +154,7 @@
 				83749CBC2B5CD3DF00AAA0CA /* SearchViewController.swift */,
 				83BF8DA12B5EE71000B29BEE /* FollowerListVC.swift */,
 				83749CBE2B5CD41D00AAA0CA /* FavoritesListViewController.swift */,
+				8312CF572B78702A005EC36C /* UserInfoVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				83BF8DA22B5EE71000B29BEE /* FollowerListVC.swift in Sources */,
 				83749CBF2B5CD41D00AAA0CA /* FavoritesListViewController.swift in Sources */,
 				83749CAB2B5C62E100AAA0CA /* SceneDelegate.swift in Sources */,
+				8312CF582B78702A005EC36C /* UserInfoVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
