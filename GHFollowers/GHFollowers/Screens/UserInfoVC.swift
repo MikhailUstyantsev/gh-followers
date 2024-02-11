@@ -23,6 +23,16 @@ class UserInfoVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
+        
+        NetworkManager.shared.getUserInfo(for: userName) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let user):
+                print(user.bio ?? "Unknown")
+            case .failure(let error):
+                self.presentGFAlertOnMainTread(title: "Something went wrong", message: error.rawValue, buttonTitle: "OK")
+            }
+        }
     }
     
     
