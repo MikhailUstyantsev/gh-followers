@@ -9,12 +9,13 @@ import UIKit
 
 
 protocol UserInfoVCDelegate: AnyObject {
-    func didTapGitHubProfile(for user: User)
-    func didTapGetFollowers(for user: User)
+    func didRequestFollowers(for username: String)
 }
 
-
 class UserInfoVC: GFDataLoadingVC {
+    
+    let scrollView          = UIScrollView()
+    let contentView         = UIView()
     
     let headerView          = UIView()
     let itemViewOne         = UIView()
@@ -22,7 +23,7 @@ class UserInfoVC: GFDataLoadingVC {
     var itemViews: [UIView] = []
     let dateLabel           = GFBodyLabel(textAlignment: .center)
     var userName: String
-    weak var delegate: FollowerListVCDelegate?
+    weak var delegate: UserInfoVCDelegate?
     
     init(userName: String) {
         self.userName = userName
@@ -36,6 +37,7 @@ class UserInfoVC: GFDataLoadingVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
+        configureScrollView()
         layoutUI()
         getUserInfo()
     }
@@ -47,7 +49,21 @@ class UserInfoVC: GFDataLoadingVC {
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
         navigationItem.rightBarButtonItem = doneButton
     }
-
+    
+    
+    func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        scrollView.pinToEdges(of: view)
+        contentView.pinToEdges(of: scrollView)
+        
+        NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: 600)
+        ])
+    }
+    
     
     func getUserInfo() {
         NetworkManager.shared.getUserInfo(for: userName) { [weak self] result in
@@ -68,11 +84,8 @@ class UserInfoVC: GFDataLoadingVC {
     
     func configureUIElements(with user: User) {
         
-        let repoItemVC          = GFRepoItemVC(user: user)
-        repoItemVC.delegate     = self
-        
-        let followerItemVC      = GFFollowerItemVC(user: user)
-        followerItemVC.delegate = self
+        let repoItemVC      = GFRepoItemVC(user: user, delegate: self)
+        let followerItemVC  = GFFollowerItemVC(user: user, delegate: self)
         
         self.add(childVC: GFUserInfoHeaderVC(user: user), to: self.headerView)
         self.add(childVC: repoItemVC, to: self.itemViewOne)
@@ -88,18 +101,18 @@ class UserInfoVC: GFDataLoadingVC {
         let itemHeigth: CGFloat = 140
         
         itemViews.forEach {
-            view.addSubview($0)
+            contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
-                $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-                $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+                $0.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+                $0.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             ])
         }
-           
+        
         NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 180),
+            headerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 210),
             
             itemViewOne.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
             itemViewOne.heightAnchor.constraint(equalToConstant: itemHeigth),
@@ -108,7 +121,7 @@ class UserInfoVC: GFDataLoadingVC {
             itemViewTwo.heightAnchor.constraint(equalToConstant: itemHeigth),
             
             dateLabel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: padding),
-            dateLabel.heightAnchor.constraint(equalToConstant: 18)
+            dateLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
     
@@ -126,8 +139,7 @@ class UserInfoVC: GFDataLoadingVC {
     }
 }
 
-
-extension UserInfoVC: UserInfoVCDelegate {
+extension UserInfoVC: GFRepoItemVCDelegate {
     
     func didTapGitHubProfile(for user: User) {
         guard let url = URL(string: user.htmlUrl) else {
@@ -140,6 +152,10 @@ extension UserInfoVC: UserInfoVCDelegate {
         
         presentSafariVC(with: url)
     }
+}
+
+
+extension UserInfoVC: GFFollowerItemVCDelegate {
     
     func didTapGetFollowers(for user: User) {
         guard user.followers != 0 else {
@@ -154,3 +170,4 @@ extension UserInfoVC: UserInfoVCDelegate {
         self.dismissVC()
     }
 }
+
