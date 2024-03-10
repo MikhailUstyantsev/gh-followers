@@ -24,18 +24,19 @@ class FollowerListVC: GFDataLoadingVC {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var followers: [Follower] = []
+    var followers: [Follower]         = []
     var filteredFollowers: [Follower] = []
-    var page = 1
-    var hasMoreFollowers       = true
-    var isSearching            = false
-    var isLoadingMoreFollowers = false
+    var page                          = 1
+    var hasMoreFollowers              = true
+    var isSearching                   = false
+    var isLoadingMoreFollowers        = false
     
     var collectionView: UICollectionView!
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Follower>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Follower>
     
     private var collectionDataSource: DataSource?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,10 +47,12 @@ class FollowerListVC: GFDataLoadingVC {
         collectionDataSource = configureDataSource()
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
+    
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
@@ -58,6 +61,7 @@ class FollowerListVC: GFDataLoadingVC {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
     }
+    
     
     func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
@@ -86,25 +90,31 @@ class FollowerListVC: GFDataLoadingVC {
             self.dismissLoadingView()
             switch result {
             case .success(let followers):
-                if followers.count < 100 {
-                    self.hasMoreFollowers = false
-                }
-                self.followers.append(contentsOf: followers)
-               
-                if followers.isEmpty {
-                    let message = "This user doesn't have any followers. Go follow them 😃"
-                    DispatchQueue.main.async {
-                        self.showEmptyStateView(with: message, in: self.view)
-                        return
-                    }
-                }
-                self.updateData(on: self.followers)
+                self.updateUI(with: followers)
             case .failure(let error):
                 self.presentGFAlertOnMainTread(title: "Bad Stuff Happend", message: error.rawValue, buttonTitle: "Ok")
             }
             self.isLoadingMoreFollowers = false
         }
     }
+    
+    
+    func updateUI(with followers: [Follower]) {
+        if followers.count < 100 {
+            self.hasMoreFollowers = false
+        }
+        self.followers.append(contentsOf: followers)
+       
+        if followers.isEmpty {
+            let message = "This user doesn't have any followers. Go follow them 😃"
+            DispatchQueue.main.async {
+                self.showEmptyStateView(with: message, in: self.view)
+                return
+            }
+        }
+        self.updateData(on: self.followers)
+    }
+    
     
     func configureDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, follower -> UICollectionViewCell? in
@@ -136,24 +146,26 @@ class FollowerListVC: GFDataLoadingVC {
             
             switch result {
             case .success(let user):
-                let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
-                
-                PersistenceManager.updateWith(favorite: favorite, actionType: .add) { error in
-                    guard let error = error else {
-                        self.presentGFAlertOnMainTread(title: "Success!", message: "You have successfully favorited this user 🎉", buttonTitle: "Hooray!")
-                        return
-                    }
-                    
-                    self.presentGFAlertOnMainTread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
-                    
-                }
-    
+                self.addUserToFavorites(user: user)
             case .failure(let error):
                 self.presentGFAlertOnMainTread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
             }
         }
     }
     
+    
+    func addUserToFavorites(user: User) {
+        let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
+        
+        PersistenceManager.updateWith(favorite: favorite, actionType: .add) { error in
+            guard let error = error else {
+                self.presentGFAlertOnMainTread(title: "Success!", message: "You have successfully favorited this user 🎉", buttonTitle: "Hooray!")
+                return
+            }
+            
+            self.presentGFAlertOnMainTread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
+        }
+    }
 }
 
 
@@ -181,8 +193,6 @@ extension FollowerListVC: UICollectionViewDelegate {
         let navController       = UINavigationController(rootViewController: destinationVC)
         present(navController, animated: true)
     }
-    
-    
 }
 
 
@@ -200,17 +210,16 @@ extension FollowerListVC: UISearchResultsUpdating {
         filteredFollowers = followers.filter { $0.login.lowercased().contains(text.lowercased()) }
         updateData(on: filteredFollowers)
     }
-    
 }
 
 
 extension FollowerListVC: UserInfoVCDelegate {
     
     func didRequestFollowers(for username: String) {
-       
         self.username   = username
         title           = username
         page            = 1
+        
         followers.removeAll()
         filteredFollowers.removeAll()
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)

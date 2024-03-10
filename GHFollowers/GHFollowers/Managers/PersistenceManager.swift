@@ -12,7 +12,6 @@ enum PersistanceActionType {
     case add, remove
 }
 
-
 enum PersistenceManager {
     
     static private let defaults = UserDefaults.standard
@@ -28,7 +27,6 @@ enum PersistenceManager {
             case .success(var favorites):
                 
                 switch actionType {
-                    
                 case .add:
                     guard !favorites.contains(favorite) else {
                         completed(.alreadyInFavorites)

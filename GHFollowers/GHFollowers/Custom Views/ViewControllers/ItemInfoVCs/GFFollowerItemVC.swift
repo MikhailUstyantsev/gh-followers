@@ -14,6 +14,7 @@ class GFFollowerItemVC: GFItemInfoVC {
     
     weak var delegate: GFFollowerItemVCDelegate?
     
+    
     init(user: User, delegate: GFFollowerItemVCDelegate) {
         super.init(user: user)
         self.user = user
@@ -30,6 +31,7 @@ class GFFollowerItemVC: GFItemInfoVC {
         super.viewDidLoad()
         configureItems()
     }
+    
     
     private func configureItems() {
         itemInfoViewOne.set(itemInfoType: .followers, withCount: user.followers)

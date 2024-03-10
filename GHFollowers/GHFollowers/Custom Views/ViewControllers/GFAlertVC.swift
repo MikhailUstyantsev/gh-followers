@@ -8,7 +8,7 @@
 import UIKit
 
 class GFAlertVC: UIViewController {
-
+    
     let containerView   = GFAlertContainerView()
     let titleLabel      = GFTitleLabel(textAlignment: .center, fontSize: 20)
     let messageLabel    = GFBodyLabel(textAlignment: .center)
@@ -20,6 +20,7 @@ class GFAlertVC: UIViewController {
     
     let padding: CGFloat = 20
     
+    
     init(alertTitle: String, message: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
         self.alertTitle     = alertTitle
@@ -27,15 +28,18 @@ class GFAlertVC: UIViewController {
         self.buttonTitle    = buttonTitle
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black.withAlphaComponent(0.75)
         view.addSubviews(containerView)
         containerView.addSubviews(titleLabel, actionButton, messageLabel)
+        
         configureContainerView()
         configureTitleLabel()
         configureActionButton()
@@ -64,6 +68,7 @@ class GFAlertVC: UIViewController {
         ])
     }
     
+    
     func configureActionButton() {
         actionButton.setTitle(buttonTitle ?? "Ok", for: .normal)
         actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
@@ -76,9 +81,11 @@ class GFAlertVC: UIViewController {
         ])
     }
     
+    
     @objc func dismissVC() {
         dismiss(animated: true)
     }
+    
     
     func configureMessageLabel() {
         messageLabel.text           = message ?? "Unable to complete request"

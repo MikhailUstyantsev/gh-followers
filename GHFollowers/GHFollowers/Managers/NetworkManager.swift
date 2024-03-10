@@ -15,6 +15,7 @@ class NetworkManager {
     
     private init() {}
     
+    
     func getFollowers(for username: String, page: Int, completed: @escaping (Result<[Follower], GFError>) -> Void) {
         let endpoint = baseUrl + "\(username)/followers?per_page=100&page=\(page)"
         
@@ -75,7 +76,7 @@ class NetworkManager {
             }
             
             do {
-                let decoder                      = JSONDecoder()
+                let decoder                     = JSONDecoder()
                 decoder.keyDecodingStrategy     = .convertFromSnakeCase
                 decoder.dateDecodingStrategy    = .iso8601
                 let user                        = try decoder.decode(User.self, from: data)
@@ -115,5 +116,4 @@ class NetworkManager {
         }
         task.resume()
     }
-    
 }

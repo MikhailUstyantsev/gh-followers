@@ -14,7 +14,8 @@ protocol GFRepoItemVCDelegate: AnyObject {
 
 class GFRepoItemVC: GFItemInfoVC {
     
-   weak var delegate: GFRepoItemVCDelegate?
+    weak var delegate: GFRepoItemVCDelegate?
+    
     
     init(user: User, delegate: GFRepoItemVCDelegate) {
         super.init(user: user)
@@ -33,14 +34,15 @@ class GFRepoItemVC: GFItemInfoVC {
         configureItems()
     }
     
+    
     private func configureItems() {
         itemInfoViewOne.set(itemInfoType: .repos, withCount: user.publicRepos)
         itemInfoViewTwo.set(itemInfoType: .gists, withCount: user.publicGists)
         actionButton.set(backgroundColor: .systemPurple, title: "GitHub Profile")
     }
     
+    
     override func actionButtonTapped() {
         delegate?.didTapGitHubProfile(for: user)
     }
-    
 }
